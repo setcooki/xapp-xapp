@@ -13,8 +13,8 @@
     },
     "require": {
         "php": ">=5.2.6",
-        "xapp-core": "master",
-        "xapp-log": "master",
+        "xapp/core": "master",
+        "xapp/log": "master",
         "firephp/firephp-core": "dev-master"
     },
     "repositories": [
