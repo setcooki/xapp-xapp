@@ -130,6 +130,21 @@ class Xapp_Registry implements Xapp_Singleton_Interface
 
 
     /**
+     * get all registry entries by passing optional namespace identifier in first argument. if ns is not set will use
+     * default ns
+     *
+     * @error 11107
+     * @param null|string $ns expects the optional namespace identifier
+     * @return mixed|null
+     * @throws Xapp_Error
+     */
+    public static function getAll($ns = null)
+    {
+        return self::get(null, $ns);
+    }
+
+
+    /**
      * sets value to registry with key for value and optional namespace
      *
      * @error 11104
@@ -204,7 +219,7 @@ class Xapp_Registry implements Xapp_Singleton_Interface
      * unregister either key from registry or complete namespace. if first parameter $key
      * is null will unset passed namespace or reset default namespace.
      *
-     * @error 11105
+     * @error 11106
      * @param null|string $key expects optional registry key
      * @param null|string $ns expects optional namespace
      * @return void

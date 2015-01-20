@@ -10,7 +10,7 @@ defined('XAPP') || require_once(dirname(__FILE__) . '/../Core/core.php');
  * @error 105
  * @author Frank Mueller <set@cooki.me>
  */
-class Xapp_Error extends ErrorException
+class Xapp_Error extends Xapp_Exception
 {
     /**
      * overwrites message var of exception class so its is public
