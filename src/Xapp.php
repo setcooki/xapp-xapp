@@ -1,6 +1,6 @@
 <?php
 
-defined('XAPP') || require_once(dirname(__FILE__) . '/../Core/core.php');
+defined('XAPP') || require_once(dirname(__FILE__) . '/../../core/core.php');
 
 xapp_import('xapp.Xapp.Error');
 
@@ -43,7 +43,7 @@ abstract class Xapp
     {
         if(!isset($GLOBALS['XAPP_PATH']) || empty($GLOBALS['XAPP_PATH']))
         {
-            require_once rtrim(__DIR__, '/\\') . "/../../core/core.php";
+            require_once rtrim(__DIR__, '/\\') . "/../../Core/core.php";
         }
 
         xapp_conf($conf);
