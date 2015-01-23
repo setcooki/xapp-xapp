@@ -1,6 +1,6 @@
 <?php
 
-defined('XAPP') || require_once(dirname(__FILE__) . '/../Core/core.php');
+defined('XAPP') || require_once(dirname(__FILE__) . '/../../core/core.php');
 
 xapp_import('xapp.Xapp.Error');
 xapp_import('xapp.Xapp.Reflection');
@@ -383,52 +383,46 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
             {
                 try
                 {
-                    $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($v[0]), RecursiveIteratorIterator::CHILD_FIRST);
+                    $iterator = new RegexIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($v[0], RecursiveIteratorIterator::CHILD_FIRST)), '/^.+\.('.implode('|', $extensions).')$/i', RecursiveRegexIterator::MATCH);
                     foreach($iterator as $i)
                     {
-                        if(stripos($i->__toString(), '.svn') === false && stripos($i->__toString(), 'branches') === false)
+                        $file = trim($i->__toString());
+                        //for xapp ext package limit iteration to first level only
+                        if(stripos($file, 'xapp' . DS . 'Ext' . DS  .'src') !== false && substr($file, strrpos($file, DS) - 3, 3) !== 'src')
                         {
-                            if(!$i->isDir())
+                            continue;
+                        }
+                        $class  = '';
+                        $path   = trim((string)substr(substr($file, 0, strrpos($file, DS)), strlen($v[0])), DS);
+                        $paths  = explode(DS, str_replace(DS . 'src','', $path));
+                        $name   = substr(basename($file), 0, strpos(basename($file), '.')); // basename
+                        $ext    = strtolower(substr($file, strrpos($file, '.') + 1));
+                        $div    = ((isset($v[2])) ? strtolower(trim($v[2])) : $separator);
+                        $ns     = ((isset($v[1]) && !empty($v[1])) ? trim(trim($v[1]), $div) : '');
+                        if(empty($path))
+                        {
+                            $class = ((!empty($ns) && $name !== 'xapp') ? $ns . $div : '') . $name;
+                        }else{
+                            $class .= ((!empty($ns) && $ns !== array_shift($paths)) ? $ns . $div : '');
+                            $paths = explode(DS, str_replace(DS . 'src','', $path));
+                            if(strtolower((string)end($paths)) === strtolower($name)){
+                                $class .= implode($div, $paths);
+                            }else if(strtolower($paths[0]) === 'xapp'){
+                                $class .= $name;
+                            }else{
+                                $class .= implode($div, array_merge($paths, array($name)));
+                            }
+                        }
+                        $class = strtolower($class);
+                        if(in_array($ext, $extensions) && !in_array($class, (array)$classes))
+                        {
+                            if(!isset($this->_classes[$k]))
                             {
-                                //for xapp ext package limit iteration to first level only
-                                if(stripos($i->__toString(), 'Xapp' . DS . 'Ext' . DS  .'src') !== false && substr($i->__toString(), strrpos($i->__toString(), DS) - 3, 3) !== 'src')
-                                {
-                                    continue;
-                                }
-
-                                $class  = '';
-                                $file   = trim($i->__toString());
-                                $path   = trim((string)substr(substr($file, 0, strrpos($file, DS)), strlen($v[0])), DS);
-                                $paths  = explode(DS, str_replace(DS . 'src','', $path));
-                                $name   = substr(basename($file), 0, strpos(basename($file), '.'));
-                                $ext    = strtolower(substr($file, strrpos($file, '.') + 1));
-                                $div    = ((isset($v[2])) ? strtolower(trim($v[2])) : $separator);
-                                $ns     = ((isset($v[1]) && !empty($v[1])) ? trim(trim($v[1]), $div) : '');
-                                if(empty($path))
-                                {
-                                    $class = ((!empty($ns) && $name !== 'xapp') ? $ns . $div : '') . $name;
-                                }else{
-                                    $class .= ((!empty($ns) && $ns !== array_shift($paths)) ? $ns . $div : '');
-                                    $paths = explode(DS, str_replace(DS . 'src','', $path));
-                                    if(end($paths) === $name)
-                                    {
-                                        $class .= implode($div, $paths);
-                                    }else{
-                                        $class .= implode($div, array_merge($paths, array($name)));
-                                    }
-                                }
-                                $class = strtolower($class);
-                                if(in_array($ext, $extensions) && !in_array($class, (array)$classes))
-                                {
-                                    if(!isset($this->_classes[$k]))
-                                    {
-                                        $this->_classes[$k] = array();
-                                    }
-                                    if(!array_key_exists($class, $this->_classes[$k]))
-                                    {
-                                        $this->_classes[$k][$class] = $file;
-                                    }
-                                }
+                                $this->_classes[$k] = array();
+                            }
+                            if(!array_key_exists($class, $this->_classes[$k]))
+                            {
+                                $this->_classes[$k][$class] = $file;
                             }
                         }
                     }
@@ -441,6 +435,7 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
                 throw new Xapp_Error(xapp_sprintf(_("unable to preload dir: %s since dir is not valid"), $v[0]), 0170501);
             }
         }
+
         return $this->_classes;
     }
 
@@ -457,7 +452,7 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
     {
         $file = null;
 
-        if($class !== null && !empty($class))
+        if(!empty($class))
         {
             $class = strtolower(trim((string)$class));
             if(strpos($class, xapp_get_option(self::NS_SEPARATOR, $this)) !== false)
