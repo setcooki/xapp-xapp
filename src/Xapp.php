@@ -43,7 +43,7 @@ abstract class Xapp
     {
         if(!isset($GLOBALS['XAPP_PATH']) || empty($GLOBALS['XAPP_PATH']))
         {
-            require_once rtrim(__DIR__, '/\\') . "/../../Core/core.php";
+            require_once rtrim(__DIR__, '/\\') . "/../../core/core.php";
         }
 
         xapp_conf($conf);
