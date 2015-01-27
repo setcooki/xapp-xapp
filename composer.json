@@ -15,7 +15,8 @@
         "php": ">=5.2.6",
         "xapp/core": "master",
         "xapp/log": "master",
-        "firephp/firephp-core": "dev-master"
+        "firephp/firephp-core": "dev-master",
+        "ccampbell/chromephp": "master"
     },
     "repositories": [
         {
