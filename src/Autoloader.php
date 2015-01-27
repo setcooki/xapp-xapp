@@ -429,7 +429,7 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
                 }
                 catch(Exception $e)
                 {
-                    throw new Xapp_Error(xapp_sprintf(_("iterator exception: %d, %s"), $e->getCode(), $e->getMessage()), 0170501);
+                    throw new Xapp_Error(xapp_sprintf(_("iterator exception: %d, %s"), $e->getCode(), $e->getMessage()), 0170502);
                 }
             }else{
                 throw new Xapp_Error(xapp_sprintf(_("unable to preload dir: %s since dir is not valid"), $v[0]), 0170501);
@@ -462,7 +462,7 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
             }
             if((bool)xapp_get_option(self::XAPP_ONLY))
             {
-                if(strpos($class, 'Xapp_') === false)
+                if(stripos($class, 'Xapp_') === false)
                 {
                     return true;
                 }
