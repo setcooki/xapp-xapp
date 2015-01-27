@@ -95,7 +95,7 @@ class Xapp_Console implements Xapp_Singleton_Interface
                 ));
                 break;
             case 'chromephp':
-                xapp_import('xapp.Ext.ChromePhp');
+                xapp_import('ccampbell.chromephp.ChromePhp');
                 $this->console = ChromePhp::getInstance();
                 if(!isset($options[ChromePhp::BACKTRACE_LEVEL]))
                 {
