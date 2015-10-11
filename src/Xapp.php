@@ -1028,19 +1028,34 @@ abstract class Xapp
 
 
     /**
-     * xapp debug reviever message called by xapp_debug outside in core.php will store
-     * debug messages in array to be flushed to screen in shutdown
+     * legacy method for Xapp::debug
      *
      * @error 10123
      * @param mixed $m expects the debug message as string or any other value
      * @param array $a expects optional arguments
-     * @return void
+     * @return array
      */
     public static function d($m, Array $a = null)
     {
+        return self::debug($m, $a);
+    }
+
+
+    /**
+     * xapp debug receiver message called by xapp_debug outside in core.php will store
+     * debug messages in array to be flushed to screen in shutdown. returns debug pool by default
+     *
+     * @error 10130
+     * @see Xapp::d
+     * @param mixed $m expects the debug message as string or any other value
+     * @param array $a expects optional arguments
+     * @return array
+     */
+    public static function debug($m, $a)
+    {
         if(sizeof(self::$_debug) === 0)
         {
-            array_push(self::$_debug, array("start xapp debug modus", microtime(true), memory_get_usage(true)));
+            array_push(self::$_debug, array("start xapp debug mode", microtime(true), memory_get_usage(true)));
         }else{
             $t = array();
             foreach(new RecursiveIteratorIterator(new RecursiveArrayIterator(array_filter((array)$m)), RecursiveIteratorIterator::LEAVES_ONLY) as $v)
@@ -1054,6 +1069,7 @@ abstract class Xapp
             }
             array_push(self::$_debug, array($m, microtime(true), memory_get_usage(true)));
         }
+        return self::$_debug;
     }
 
 
