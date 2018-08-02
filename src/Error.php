@@ -132,7 +132,7 @@ class Xapp_Error extends Xapp_Exception
      * @see Xapp_Error::__construct
      * @static
      * @error 10505
-     * @param string|Exception $mixed expects any of the in the class constructor described values
+     * @param string|Throwable $mixed expects any of the in the class constructor described values
      * @param int $code expects optional error code
      * @param int $severity expects optional severity level
      * @param null|string $file expects file name where error occurred
@@ -150,12 +150,12 @@ class Xapp_Error extends Xapp_Exception
      *
      * @static
      * @error 10506
-     * @param Exception $e expects instance or sub class of phps native Exception
+     * @param Throwable $e expects instance or sub class of phps native Exception
      * @param bool $stack expects boolean value for stack error
      * @return void
-     * @throws Exception
+     * @throws Throwable
      */
-    public static function t(Exception $e, $stack = false)
+    public static function t(Throwable $e, $stack = false)
     {
         if((bool)$stack)
         {
@@ -199,10 +199,10 @@ class Xapp_Error extends Xapp_Exception
      *
      * @static
      * @error 10508
-     * @param Exception $e expects the error object
+     * @param Throwable $e expects the error object
      * @return void
      */
-    protected static function stack(Exception $e = null)
+    protected static function stack(Throwable $e = null)
     {
         $k = "";
 
@@ -274,10 +274,10 @@ class Xapp_Error extends Xapp_Exception
      *
      * @static
      * @error 10512
-     * @param Exception $e
+     * @param Throwable $e
      * @return bool false
      */
-    public static function exceptionHandler(Exception $e = null)
+    public static function exceptionHandler(Throwable $e = null)
     {
         if($e !== null)
         {

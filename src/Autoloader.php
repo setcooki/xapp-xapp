@@ -178,10 +178,7 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
         {
             if(!function_exists('__autoload'))
             {
-                function __autoload($class)
-                {
-                    self::instance()->load($class);
-                }
+                spl_autoload_register(array($this, 'load'));
             }else{
                 throw new Xapp_Error(_("xapp autoloader can not overwrite autoloading since __autoload is already set"), 1070101);
             }
