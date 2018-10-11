@@ -3,7 +3,7 @@
     "type": "xapp-module",
     "keywords": ["xapp", "xapp"],
     "homepage": "https://github.com/setcooki/xapp-all",
-    "license": "GPL",
+    "license": "GPL-2.0-only",
     "support":{
         "issues": "http://agile.cooki.me",
         "wiki": "https://github.com/setcooki/xapp-all"
@@ -13,8 +13,8 @@
     },
     "require": {
         "php": ">=5.2.6",
-        "xapp/core": "master",
-        "xapp/log": "master",
+        "xapp/core": "dev-master",
+        "xapp/log": "dev-master",
         "firephp/firephp-core": "dev-master",
         "ccampbell/chromephp": "master"
     },
