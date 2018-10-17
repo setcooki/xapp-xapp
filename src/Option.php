@@ -103,7 +103,7 @@ class Xapp_Option extends ArrayObject
         {
             return call_user_func_array(array('parent', 'offset' . ucfirst($name)), (array)$args);
         }else{
-            throw new Xapp_Error(xapp_sprintf(_("unable to overload class with: %s"), $name), 1030601);
+            throw new Xapp_Error(xapp_sprintf(__("unable to overload class with: %s"), $name), 1030601);
         }
     }
 

@@ -417,7 +417,7 @@ abstract class Xapp
             }
             if(!is_object($object) && !Xapp_Reflection::isStaticProperty($object, 'options'))
             {
-                throw new Xapp_Error(xapp_sprintf(_("access to none static property \$options is not allowed for static class: %s"), $object), 1010703);
+                throw new Xapp_Error(xapp_sprintf(__("access to none static property \$options is not allowed for static class: %s"), $object), 1010703);
             }
             $options = array_merge((array)Xapp_Reflection::propertyFactory($object, 'options', 'NIL', true), $options);
             if(is_object($object))
@@ -430,13 +430,13 @@ abstract class Xapp
             {
                 if((int)$v === 1 && !array_key_exists($k, $options))
                 {
-                    throw new Xapp_Error(xapp_sprintf(_("unable to initialize options since option: %s must be set"), $k), 1010701);
+                    throw new Xapp_Error(xapp_sprintf(__("unable to initialize options since option: %s must be set"), $k), 1010701);
                 }
             }
         }
         catch(ReflectionException $e)
         {
-            throw new Xapp_Error(xapp_sprintf(_("reflection error: %d, %s"), $e->getCode(), $e->getMessage()), 1010702);
+            throw new Xapp_Error(xapp_sprintf(__("reflection error: %d, %s"), $e->getCode(), $e->getMessage()), 1010702);
         }
     }
 
@@ -509,7 +509,7 @@ abstract class Xapp
         {
             if(!is_object($object) && !Xapp_Reflection::isStaticProperty($object, 'options'))
             {
-                throw new Xapp_Error(xapp_sprintf(_("access to none static property \$options is not allowed for static class: %s"), $object), 1011003);
+                throw new Xapp_Error(xapp_sprintf(__("access to none static property \$options is not allowed for static class: %s"), $object), 1011003);
             }else{
                 $options = (array)Xapp_Reflection::propertyFactory($object, 'options', 'NIL', true);
             }
@@ -533,7 +533,7 @@ abstract class Xapp
                             {
                                 if(!xapp_is($v, $value))
                                 {
-                                    throw new Xapp_Error(xapp_sprintf(_("unable to set option: %s due to missing or invalid dataype"), $key), 1011001, XAPP_ERROR_IGNORE);
+                                    throw new Xapp_Error(xapp_sprintf(__("unable to set option: %s due to missing or invalid dataype"), $key), 1011001, XAPP_ERROR_IGNORE);
                                 }else{
                                     $ok++;
                                 }
@@ -541,7 +541,7 @@ abstract class Xapp
                         }else{
                             if(!class_exists($v) || !($value instanceof $v))
                             {
-                                throw new Xapp_Error(xapp_sprintf(_("unable to set option: %s since value must be instance of: %s"), $key, $v), 1011002, XAPP_ERROR_IGNORE);
+                                throw new Xapp_Error(xapp_sprintf(__("unable to set option: %s since value must be instance of: %s"), $key, $v), 1011002, XAPP_ERROR_IGNORE);
                             }else{
                                 $ok++;
                             }
@@ -596,7 +596,7 @@ abstract class Xapp
         }
         if(!is_object($object) && !Xapp_Reflection::isStaticProperty($object, 'options'))
         {
-            throw new Xapp_Error(xapp_sprintf(_("access to none static property \$options is not allowed for static class: %s"), $object), 1011101);
+            throw new Xapp_Error(xapp_sprintf(__("access to none static property \$options is not allowed for static class: %s"), $object), 1011101);
         }else{
             $options = Xapp_Reflection::propertyFactory($object, 'options', 'NIL', true);
             if(array_key_exists($key, $options))
@@ -633,7 +633,7 @@ abstract class Xapp
             }
             if(!is_object($object) && !Xapp_Reflection::isStaticProperty($object, 'options'))
             {
-                throw new Xapp_Error(xapp_sprintf(_("access to none static property \$options is not allowed for static class: %s"), $object), 1011201);
+                throw new Xapp_Error(xapp_sprintf(__("access to none static property \$options is not allowed for static class: %s"), $object), 1011201);
             }else{
                 try
                 {
@@ -665,7 +665,7 @@ abstract class Xapp
         }
         if(!is_object($object) && !Xapp_Reflection::isStaticProperty($object, 'options'))
         {
-            throw new Xapp_Error(xapp_sprintf(_("access to none static property \$options is not allowed for static class: %s"), $object), 1011301);
+            throw new Xapp_Error(xapp_sprintf(__("access to none static property \$options is not allowed for static class: %s"), $object), 1011301);
         }else{
             try
             {
@@ -700,7 +700,7 @@ abstract class Xapp
         }
         if(!is_object($object) && !Xapp_Reflection::isStaticProperty($object, 'options'))
         {
-            throw new Xapp_Error(xapp_sprintf(_("access to none static property \$options is not allowed for static class: %s"), $object), 1011401);
+            throw new Xapp_Error(xapp_sprintf(__("access to none static property \$options is not allowed for static class: %s"), $object), 1011401);
         }else{
             try
             {
@@ -732,7 +732,7 @@ abstract class Xapp
         }
         if(!is_object($object) && !Xapp_Reflection::isStaticProperty($object, 'options'))
         {
-            throw new Xapp_Error(xapp_sprintf(_("access to none static property \$options is not allowed for static class: %s"), $object), 1011501);
+            throw new Xapp_Error(xapp_sprintf(__("access to none static property \$options is not allowed for static class: %s"), $object), 1011501);
         }
         Xapp_Reflection::propertyFactory($object, 'options', array(), true);
     }
@@ -815,10 +815,10 @@ abstract class Xapp
                     return $this->$property = (sizeof($args) === 1) ? $args[0] : $args;
                 }
             }else{
-                throw new Xapp_Error(xapp_sprintf(_("property: %s does not exist an can not be called via overloading"), $property), 1011502);
+                throw new Xapp_Error(xapp_sprintf(__("property: %s does not exist an can not be called via overloading"), $property), 1011502);
             }
         }else{
-            throw new Xapp_Error(xapp_sprintf(_("method: %s does not exist and can not be called via overloading"), $method), 1011501);
+            throw new Xapp_Error(xapp_sprintf(__("method: %s does not exist and can not be called via overloading"), $method), 1011501);
         }
     }
 
@@ -927,7 +927,7 @@ abstract class Xapp
         }else if(is_object($mixed)){
             return ((bool)$lower) ? strtolower(get_class($mixed)) : get_class($mixed);
         }else{
-            throw new Xapp_Error(xapp_sprintf(_("unable to determine class name from passed value: %s"), $mixed), 1011901);
+            throw new Xapp_Error(xapp_sprintf(__("unable to determine class name from passed value: %s"), $mixed), 1011901);
         }
     }
 

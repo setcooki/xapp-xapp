@@ -180,7 +180,7 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
             {
                 spl_autoload_register(array($this, 'load'));
             }else{
-                throw new Xapp_Error(_("xapp autoloader can not overwrite autoloading since __autoload is already set"), 1070101);
+                throw new Xapp_Error(__("xapp autoloader can not overwrite autoloading since __autoload is already set"), 1070101);
             }
         }else{
             @spl_autoload_register(array(get_class($this), 'load'), true);
@@ -262,7 +262,7 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
                             $this->_dirs[$hash] = array_merge(array(rtrim($tmp, DS) . DS), $ns);
                         }
                     }else{
-                        throw new Xapp_Error(xapp_sprintf(_("relative dir: %s is not a valid dir"), $dir[0]), 1070901);
+                        throw new Xapp_Error(xapp_sprintf(__("relative dir: %s is not a valid dir"), $dir[0]), 1070901);
                     }
                 }
             }
@@ -426,10 +426,10 @@ class Xapp_Autoloader implements Xapp_Singleton_Interface
                 }
                 catch(Exception $e)
                 {
-                    throw new Xapp_Error(xapp_sprintf(_("iterator exception: %d, %s"), $e->getCode(), $e->getMessage()), 0170502);
+                    throw new Xapp_Error(xapp_sprintf(__("iterator exception: %d, %s"), $e->getCode(), $e->getMessage()), 0170502);
                 }
             }else{
-                throw new Xapp_Error(xapp_sprintf(_("unable to preload dir: %s since dir is not valid"), $v[0]), 0170501);
+                throw new Xapp_Error(xapp_sprintf(__("unable to preload dir: %s since dir is not valid"), $v[0]), 0170501);
             }
         }
 

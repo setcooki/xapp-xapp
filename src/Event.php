@@ -47,11 +47,11 @@ class Xapp_Event
 
         if(!is_array($callback) && !is_callable($callback, false, $var))
         {
-            throw new Xapp_Error(xapp_sprintf(_("invalid callback function: %s supplied for event: %s"), $var, $event), 1040201);
+            throw new Xapp_Error(xapp_sprintf(__("invalid callback function: %s supplied for event: %s"), $var, $event), 1040201);
         }
         if(is_array($callback) && !is_callable($callback, true, $var))
         {
-            throw new Xapp_Error(xapp_sprintf(_("invalid callback class/method: %s supplied for event: %s"), $var, $event), 1040202);
+            throw new Xapp_Error(xapp_sprintf(__("invalid callback class/method: %s supplied for event: %s"), $var, $event), 1040202);
         }
         if(!isset(self::$_events))
         {
@@ -129,7 +129,7 @@ class Xapp_Event
                     }else if(strtolower((string)$index) === 'last'){
                         array_pop(self::$_events[$event]);
                     }else{
-                        throw new Xapp_Error(xapp_sprintf(_("unable to reset listener for event name and index: %s"), $index), 1040501);
+                        throw new Xapp_Error(xapp_sprintf(__("unable to reset listener for event name and index: %s"), $index), 1040501);
                     }
                 }else{
                     self::$_events[$event] = array();

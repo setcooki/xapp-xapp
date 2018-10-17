@@ -86,10 +86,10 @@ abstract class Xapp_Reflection
                         return $cls->newInstance();
                     }
                 }else{
-                    throw new Xapp_Error(xapp_sprintf(_("class: %s can not be instantiated since class is abstract"), $_class), 1060203);
+                    throw new Xapp_Error(xapp_sprintf(__("class: %s can not be instantiated since class is abstract"), $_class), 1060203);
                 }
             }else{
-                throw new Xapp_Error(xapp_sprintf(_("class: %s does not exist"), $_class), 1060201);
+                throw new Xapp_Error(xapp_sprintf(__("class: %s does not exist"), $_class), 1060201);
             }
         }
         catch(ReflectionException $e)
@@ -152,10 +152,10 @@ abstract class Xapp_Reflection
                         }
                     }
                 }else{
-                    throw new Xapp_Error(xapp_sprintf(_("method: %s of class: %s can not be invoked since method is protected"), $method, $_class), 1060303);
+                    throw new Xapp_Error(xapp_sprintf(__("method: %s of class: %s can not be invoked since method is protected"), $method, $_class), 1060303);
                 }
             }else{
-                throw new Xapp_Error(xapp_sprintf(_("class: %s or method: %s does not exist"), $_class, $method), 1060301);
+                throw new Xapp_Error(xapp_sprintf(__("class: %s or method: %s does not exist"), $_class, $method), 1060301);
             }
         }
         catch(ReflectionException $e)
@@ -216,7 +216,7 @@ abstract class Xapp_Reflection
                             return $props[$property];
                         }
                     }else{
-                        throw new Xapp_Error(xapp_sprintf(_("static property: %s does not exist in class: %s"), $property, $_class), 1060404);
+                        throw new Xapp_Error(xapp_sprintf(__("static property: %s does not exist in class: %s"), $property, $_class), 1060404);
                     }
                 }else{
                     if(is_object($class))
@@ -246,11 +246,11 @@ abstract class Xapp_Reflection
                         $prop = null;
                         return $return;
                     }else{
-                        throw new Xapp_Error(xapp_sprintf(_("unable to set/get non static property for class: %s passed as string"), $_class), 1060403);
+                        throw new Xapp_Error(xapp_sprintf(__("unable to set/get non static property for class: %s passed as string"), $_class), 1060403);
                     }
                 }
             }else{
-                throw new Xapp_Error(xapp_sprintf(_("class: %s or property: %s does not exist"), $_class, $property), 1060402);
+                throw new Xapp_Error(xapp_sprintf(__("class: %s or property: %s does not exist"), $_class, $property), 1060402);
             }
         }
         catch(ReflectionException $e)
@@ -297,7 +297,7 @@ abstract class Xapp_Reflection
                         return $obj->getConstant(strtoupper($const));
                     }
                 }else{
-                    throw new Xapp_Error(xapp_sprintf(_("const: %s does not exist in class: %s"), $const, $_class), 1060502);
+                    throw new Xapp_Error(xapp_sprintf(__("const: %s does not exist in class: %s"), $const, $_class), 1060502);
                 }
             }else{
                 return $obj->getConstants();

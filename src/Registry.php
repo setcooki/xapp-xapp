@@ -124,7 +124,7 @@ class Xapp_Registry implements Xapp_Singleton_Interface
                 return $self->_registry[$ns];
             }
         }else{
-            throw new Xapp_Error(xapp_sprintf(_("unable to get registry since namespace: %s does not exist"), $ns), 1110301);
+            throw new Xapp_Error(xapp_sprintf(__("unable to get registry since namespace: %s does not exist"), $ns), 1110301);
         }
     }
 

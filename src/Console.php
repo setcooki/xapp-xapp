@@ -115,7 +115,7 @@ class Xapp_Console implements Xapp_Singleton_Interface
                 ));
                 break;
             default:
-                throw new Xapp_Error(xapp_sprintf(_("xapp console driver: %s not supported"), $driver), 1090101);
+                throw new Xapp_Error(xapp_sprintf(__("xapp console driver: %s not supported"), $driver), 1090101);
         }
     }
 
@@ -298,7 +298,7 @@ class Xapp_Console implements Xapp_Singleton_Interface
                     break;
             }
         }else{
-            throw new Xapp_Error(xapp_sprintf(_("xapp console log type: %s not supported"), $type), 1090801);
+            throw new Xapp_Error(xapp_sprintf(__("xapp console log type: %s not supported"), $type), 1090801);
         }
     }
 }
