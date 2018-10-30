@@ -537,6 +537,8 @@ abstract class Xapp
                                 }else{
                                     $ok++;
                                 }
+                            }else{
+                                $ok++;
                             }
                         }else{
                             if(!class_exists($v) || !($value instanceof $v))
